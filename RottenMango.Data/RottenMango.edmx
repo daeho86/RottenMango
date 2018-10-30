@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RottenMangoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DailySummary">
+          <Key>
+            <PropertyRef Name="statisticId" />
+          </Key>
+          <Property Name="statisticId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="avgMemory" Type="float" Nullable="false" />
+          <Property Name="avgCPU" Type="float" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ProcessSnapshot">
+          <Key>
+            <PropertyRef Name="ProcSId" />
+          </Key>
+          <Property Name="ProcSId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="usingCpu" Type="float" Nullable="false" />
+          <Property Name="usingMemory" Type="float" Nullable="false" />
+          <Property Name="recordTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="RottenMangoModelStoreContainer">
+          <EntitySet Name="DailySummary" EntityType="Self.DailySummary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProcessSnapshot" EntityType="Self.ProcessSnapshot" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RottenMangoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="RottenMangoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ProcessSnapshots" EntityType="RottenMangoModel.ProcessSnapshot" />
+          <EntitySet Name="DailySummaries" EntityType="RottenMangoModel.DailySummary" />
+        </EntityContainer>
+        <EntityType Name="ProcessSnapshot">
+          <Key>
+            <PropertyRef Name="ProcSId" />
+          </Key>
+          <Property Name="ProcSId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="usingCpu" Type="Double" Nullable="false" />
+          <Property Name="usingMemory" Type="Double" Nullable="false" />
+          <Property Name="recordTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="DailySummary">
+          <Key>
+            <PropertyRef Name="statisticId" />
+          </Key>
+          <Property Name="statisticId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="avgMemory" Type="Double" Nullable="false" />
+          <Property Name="avgCPU" Type="Double" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RottenMangoModelStoreContainer" CdmEntityContainer="RottenMangoEntities">
+          <EntitySetMapping Name="ProcessSnapshots">
+            <EntityTypeMapping TypeName="RottenMangoModel.ProcessSnapshot">
+              <MappingFragment StoreEntitySet="ProcessSnapshot">
+                <ScalarProperty Name="recordTime" ColumnName="recordTime" />
+                <ScalarProperty Name="usingMemory" ColumnName="usingMemory" />
+                <ScalarProperty Name="usingCpu" ColumnName="usingCpu" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="ProcSId" ColumnName="ProcSId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DailySummaries">
+            <EntityTypeMapping TypeName="RottenMangoModel.DailySummary">
+              <MappingFragment StoreEntitySet="DailySummary">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="avgCPU" ColumnName="avgCPU" />
+                <ScalarProperty Name="avgMemory" ColumnName="avgMemory" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="statisticId" ColumnName="statisticId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="없음" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
